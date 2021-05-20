@@ -6,16 +6,23 @@ SECRET_KEY = '-&jgw)61^((ex3%6-nr&*xzmw+aq0z7s@-^)y=y&#-x$35(^6e'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "[::1]",
+    "testserver",
+]
 
 INSTALLED_APPS = [
+    'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'posts',
+    'posts.apps.PostsConfig',
+    'about.apps.AboutConfig',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +79,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -85,3 +92,13 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+LOGIN_URL = "/auth/login/"
+
+LOGIN_REDIRECT_URL = "posts:index"
+
+LOGOUT_REDIRECT_URL = "posts:index"
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
