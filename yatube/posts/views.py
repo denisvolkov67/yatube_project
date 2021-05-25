@@ -83,13 +83,7 @@ def new_post(request):
             post.author = request.user
             post.save()
 
-            return redirect('posts:index')
-
-        return render(
-            request,
-            'posts/edit.html',
-            {'form': form, 'action': 'new_post', }
-        )
+            return redirect('index')
 
     return render(
         request,
@@ -103,24 +97,14 @@ def post_edit(request, username, post_id):
     post = get_object_or_404(Post, pk=post_id, author__username=username)
 
     if post.author != request.user:
-        return redirect('posts:post', username=username, post_id=post_id)
+        return redirect('post', username=username, post_id=post_id)
 
     form = PostForm(request.POST or None, instance=post)
 
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('posts:post', username=username, post_id=post_id)
-
-        return render(
-            request,
-            'posts/edit.html',
-            {
-                'form': form,
-                'action': 'post_edit',
-                'post_id': post_id,
-            }
-        )
+            return redirect('post', username=username, post_id=post_id)
 
     return render(
         request,
