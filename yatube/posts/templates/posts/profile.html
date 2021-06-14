@@ -1,43 +1,19 @@
 {% extends "base.html" %} 
-{% block title %}Последние обновления на сайте{% endblock %}
+{% block title %}{{ author.get_full_name }}{% endblock %}
 {% block content %}
     
     <main role="main" class="container">
         <div class="row">
           <div class="col-md-3 mb-3 mt-1">
-            <div class="card">
-              <div class="card-body">
-                <div class="h2">
-                   {{ author.get_full_name }}
-                </div>
-                <div class="h3 text-muted">
-                    @{{ author.username }}
-                 </div>
-               </div>
-               <ul class="list-group list-group-flush">
-                 <li class="list-group-item">
-                   <div class="h6 text-muted">
-                     Подписчиков: XXX <br />
-                     Подписан: XXX
-                    </div>
-                 </li>
-                 <li class="list-group-item">
-                    <div class="h6 text-muted">
-                      Записей: {{ count_page }}
-                     </div>
-                  </li>
-                </ul>
-              </div>
-           </div>
-      
-         
-           <div class="col-md-9">
+            {% include 'posts/includes/author.html' %}
+          </div>
+          <div class="col-md-9">
             {% for post in page %}
-              {% include 'includes/post.html' %}
+              {% include 'posts/includes/post_item.html' %}
             {% endfor %}
 
-            {% include "paginator.html" %}
-           </div>
+            {% include 'paginator.html' %}
+          </div>
         </div>
       </main>
 

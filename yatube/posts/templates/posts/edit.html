@@ -10,9 +10,9 @@
 {% load user_filters %}
 
 {% if action == 'new_post' %}
-  <form method="post" action="{% url 'new_post' %}">
+  <form method="post" action="{% url 'new_post' %}" enctype="multipart/form-data">
 {% else %}
-  <form method="post" action="{% url 'post_edit' request.user.username post_id %}">
+  <form method="post" action="{% url 'post_edit' request.user.username post_id %}" enctype="multipart/form-data">
 {% endif %}
     {% csrf_token %}
 

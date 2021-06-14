@@ -1,35 +1,14 @@
 {% extends "base.html" %} 
-{% block title %}Последние обновления на сайте{% endblock %}
+{% block title %}Пост. {{ author.get_full_name }}{% endblock %}
 {% block content %}
     <main role="main" class="container">
     <div class="row">
       <div class="col-md-3 mb-3 mt-1">
-        <div class="card">
-          <div class="card-body">
-            <div class="h2">
-                {{ post.author.get_full_name }}
-            </div>
-            <div class="h3 text-muted">
-               @{{ post.author.username }}
-            </div>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <div class="h6 text-muted">
-                Подписчиков: XXX <br />
-                Подписан: XXX
-              </div>
-            </li>
-            <li class="list-group-item">
-              <div class="h6 text-muted">
-                Записей: {{ count_page }}
-              </div>
-            </li>
-          </ul>
-        </div>
+        {% include 'posts/includes/author.html' %}
       </div>
       <div class="col-md-9">
-        {% include 'includes/post.html' %}
+        {% include 'posts/includes/post_item.html' %}
+        {% include 'posts/comments.html' %}
       </div>
     </div>
   </main>

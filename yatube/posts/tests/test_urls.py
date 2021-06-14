@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
+from django.core.cache import cache
 
 from ..models import Group, Post
 
@@ -30,6 +31,7 @@ class PostURLTests(TestCase):
         self.authorized_client_without_post = Client()
         self.authorized_client_without_post.force_login(
             User.objects.create_user(username='mayak'))
+        cache.clear()
 
     def test_urls_anonymous_exists_at_desired_location(self):
         """Страницы доступны анонимному пользователю"""
@@ -40,6 +42,8 @@ class PostURLTests(TestCase):
             '/Zenon/': 200,
             '/Zenon/1/': 200,
             '/Zenon/1/edit/': 302,
+            '/Zenon/1/comment/': 302,
+            '/none-author/': 404,
         }
         for address, status_code in address_status_code_names.items():
             with self.subTest(address=address):

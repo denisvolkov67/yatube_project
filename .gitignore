@@ -147,3 +147,5 @@ dmypy.json
 
 yatube/static/
 yatube/posts/static/
+
+yatube/media/
