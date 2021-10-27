@@ -9,7 +9,7 @@ Django 2.2.19
 - Установите зависимости из файла requirements.txt
 ```bash
 pip install -r requirements.txt
-``` bash
+```bash
 - В папке с файлом manage.py выполните команду:
 ```bash
 python3 manage.py runserver
